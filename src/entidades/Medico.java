@@ -18,10 +18,10 @@ public class Medico {
         this.idMedico = idMedico;
         if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
                 || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
-            arquivo = new File("C:\\workspace\\Projeto3-POO\\Arquivos\\Dr(a) " + nome);
+            arquivo = new File("C:\\workspace\\Projeto3-POO\\Arquivos\\Médicos\\Dr(a) " + nome);
             arquivo.mkdir();
         } else {
-            arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/Dr(a) " + nome);
+            arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/Médicos/Dr(a) " + nome);
             arquivo.mkdir();
         }
     }

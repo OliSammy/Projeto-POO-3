@@ -1,14 +1,20 @@
 import entidades.*;
+import servicos.Inicializador;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Medico doutor2 = new Medico("Clara", "Oftamologista", 3);
-        Medico doutor3 = new Medico("Samuel", "Urologista", 4);
-        // Paciente paciente = new Paciente("Samuel", 18, "Masculino", 01);
+        Paciente paciente = new Paciente("Matheus", 24, "Masculino", 02);
         Staff staff = new Staff();
-        staff.iniciar();
+        Clientes clientes = new Clientes();
+        Inicializador ini = new Inicializador();
+        ini.iniciar(staff);
+        ini.iniciar(clientes);
+        try {
+            clientes.inserirPaciente(paciente);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println(staff.listarMedicos());
-        staff.removerMedico(18);
-        System.out.println(staff.listarMedicos());
+        System.out.println(clientes.listarPacientes());
     }
 }
