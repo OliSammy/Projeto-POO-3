@@ -55,9 +55,34 @@ public class Staff {
     }
 
     // Inserir no arquivo dos Medicos
+    public void inciar() throws IOException, MedicoJaCadastradoException {
+        String linha = new String();
+        if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
+                || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
+            arquivo = new File("C:\\workspace\\Projeto3-POO\\Arquivos\\Staff\\staff.txt");
+        } else {
+            arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/Staff/staff.txt");
+        }
+        FileReader leitor = new FileReader(arquivo);
+        BufferedReader leitorBuff = new BufferedReader(leitor);
+        linha = leitorBuff.readLine();
+        while (true) {
+
+            if (linha == null) {
+                break;
+            }
+            String[] dados = linha.split("-");
+            int id = Integer.parseInt(dados[2]);
+            Medico x = new Medico(dados[0], dados[1], id);
+            inserirMedico(x);
+            linha = leitorBuff.readLine();
+        }
+        leitorBuff.close();
+    }
+
     public void registrarArquivo() throws IOException {
-        if (System.getProperty("os.name").equalsIgnoreCase("windowns 11")
-                || System.getProperty("os.name").equalsIgnoreCase("windowns 10")) {
+        if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
+                || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
             arquivo = new File("C:\\workspace\\Projeto3-POO\\Arquivos\\Staff\\staff.txt");
         } else {
             arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/Staff/staff.txt");
@@ -66,7 +91,7 @@ public class Staff {
         BufferedWriter escritorBuff = new BufferedWriter(escritor);
         for (Medico medico : staff) {
             escritorBuff
-                    .write(medico.getNome() + "\t" + medico.getEspecialidade() + "\t" + medico.getIdMedico() + "\n");
+                    .write(medico.getNome() + "-" + medico.getEspecialidade() + "-" + medico.getIdMedico() + "\n");
         }
         escritorBuff.close();
     }
