@@ -55,7 +55,7 @@ public class Staff {
     }
 
     // Inserir no arquivo dos Medicos
-    public void inciar() throws IOException, MedicoJaCadastradoException {
+    public void iniciar() throws IOException, MedicoJaCadastradoException {
         String linha = new String();
         if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
                 || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
