@@ -36,7 +36,8 @@ public class Agenda {
 
     public void verificaHorario(Agendamento agendamento) throws AgendamentoIndisponivelException {
         for (Agendamento agendamentoCadastrado : agenda) {
-            if (agendamentoCadastrado.getHorario().equalsIgnoreCase(agendamento.getHorario())) {
+            if (agendamentoCadastrado.getHorario().equalsIgnoreCase(agendamento.getHorario())
+                    && agendamentoCadastrado.getNomeMedico().equalsIgnoreCase(agendamento.getNomeMedico())) {
                 throw new AgendamentoIndisponivelException();
             }
         }
@@ -119,6 +120,20 @@ public class Agenda {
             escritorBuff.close();
         }
 
+    }
+
+    public void removerArquivo(int idAgendamento) throws IOException {
+        if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
+                || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
+            arquivo = new File(
+                    "C:\\workspace\\Projeto3-POO\\Arquivos\\Agendamentos\\");
+        } else {
+            arquivo = new File(
+                    "/home/matheus/Programming/Projeto3-POO/Arquivos/Agendamentos/");
+        }
+        for (File arquivos : arquivo.listFiles()) {
+            System.out.println(arquivos.getName());
+        }
     }
 
     public ArrayList<Agendamento> getAgenda() {

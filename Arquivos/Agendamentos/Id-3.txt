@@ -1,5 +1,0 @@
-Id:-3
-Doutor(a):-Julio
-Paciente:-Matheus
-Especialidade:-Pulmonar
-Horário agendado:-03/07/2022 15:00

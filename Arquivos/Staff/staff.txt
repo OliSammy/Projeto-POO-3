@@ -1,5 +1,3 @@
 Matheus-Dentista-1
-Dede-Seilá-2
-Kaka-Dentista-3
-Nando-Dentista-4
-Cezar-Dentista-5
+Samuel-Legista-2
+Clara-Oftamologista-3
