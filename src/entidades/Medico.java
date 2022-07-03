@@ -1,12 +1,9 @@
 package entidades;
 
-import java.io.*;
-
 public class Medico {
     private String nome;
     private String especialidade;
     private int idMedico;
-    private File arquivo;
 
     // Constructo vazio pra eventuais ordenações
     public Medico() {
@@ -16,14 +13,6 @@ public class Medico {
         this.nome = nome;
         this.especialidade = especialidade;
         this.idMedico = idMedico;
-        if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
-                || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
-            arquivo = new File("C:\\workspace\\Projeto3-POO\\Arquivos\\Médicos\\Dr(a) " + nome);
-            arquivo.mkdir();
-        } else {
-            arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/Médicos/Dr(a) " + nome);
-            arquivo.mkdir();
-        }
     }
 
     public void setNome(String nome) {

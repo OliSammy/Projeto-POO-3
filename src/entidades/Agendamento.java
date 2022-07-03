@@ -1,8 +1,6 @@
-package servicos;
+package entidades;
 
 import java.util.Date;
-
-import entidades.*;
 
 public class Agendamento {
     private Medico medico;
@@ -40,11 +38,20 @@ public class Agendamento {
         this.horario = horario;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Id: " + id +
                 "\nDoutor(a): " + medico.getNome() +
                 "\nPaciente: " + paciente.getNome() +
-                "\nHorário: " + horario.getTime() + "\n";
+                "\nEspecialidade: " + medico.getEspecialidade() +
+                "\nHorário: " + horario.toString() + "\n";
     }
 }
