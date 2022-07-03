@@ -59,15 +59,16 @@ public class Agendamento {
                 "\nDoutor(a): " + nomeMedico +
                 "\nPaciente: " + nomePaciente +
                 "\nEspecialidade: " + especialidadeMedico +
-                "\nHorário: " + horario + "\n";
+                "\nHorário agendado: " + horario + "\n";
     }
 
     @Override
     public String toString() {
+
         return "Id:-" + id +
                 "\nDoutor(a):-" + nomeMedico +
                 "\nPaciente:-" + nomePaciente +
                 "\nEspecialidade:-" + especialidadeMedico +
-                "\nHorário:-" + horario + "\n";
+                "\nHorário agendado:-" + horario + "\n";
     }
 }
