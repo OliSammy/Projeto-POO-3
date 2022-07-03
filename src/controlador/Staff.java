@@ -1,8 +1,9 @@
-package entidades;
+package controlador;
 
 import java.io.*;
 import java.util.ArrayList;
 
+import entidades.Medico;
 import exceptions.*;
 
 public class Staff {
@@ -40,6 +41,15 @@ public class Staff {
     public Medico selecionaMedico(int idMedico) throws MedicoNaoEncontradoException {
         for (Medico medicoCadastradMedico : staff) {
             if (medicoCadastradMedico.getIdMedico() == idMedico) {
+                return medicoCadastradMedico;
+            }
+        }
+        throw new MedicoNaoEncontradoException();
+    }
+
+    public Medico selecionaMedico(String nomeMedico) throws MedicoNaoEncontradoException {
+        for (Medico medicoCadastradMedico : staff) {
+            if (medicoCadastradMedico.getNome() == nomeMedico) {
                 return medicoCadastradMedico;
             }
         }

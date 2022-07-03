@@ -9,15 +9,16 @@ import exceptions.AgendamentoIndisponivelException;
 public class Agenda {
     private ArrayList<Agendamento> agenda;
     private File arquivo;
-    private int controleId = 01;
+    private int controleId;
 
     public Agenda() {
         agenda = new ArrayList<Agendamento>();
     }
 
     public void agendar(Agendamento agendamento) throws AgendamentoIndisponivelException, IOException {
+        controleId = agenda.size();
         verificaHorario(agendamento);
-        agendamento.setId(controleId);
+        agendamento.setId(controleId + 1);
         controleId++;
         agenda.add(agendamento);
         registrar();
@@ -25,10 +26,28 @@ public class Agenda {
 
     public void verificaHorario(Agendamento agendamento) throws AgendamentoIndisponivelException {
         for (Agendamento agendamentoCadastrado : agenda) {
-            if (agendamentoCadastrado.getHorario() == agendamento.getHorario()) {
+            if (agendamentoCadastrado.getHorario().equalsIgnoreCase(agendamento.getHorario())) {
                 throw new AgendamentoIndisponivelException();
             }
         }
+    }
+
+    public void removerAgendamento(int idAgendamento) throws IOException {
+        for (Agendamento agendados : agenda) {
+            if (agendados.getId() == idAgendamento) {
+                agenda.remove(agendados);
+                break;
+            }
+        }
+        registrar();
+    }
+
+    public String listarAgendamentos() {
+        StringBuilder saida = new StringBuilder();
+        for (Agendamento agendados : agenda) {
+            saida.append(agendados.toStringBonito());
+        }
+        return saida.toString();
     }
 
     // Inserir no arquivo dos Medicos

@@ -1,7 +1,8 @@
-package entidades;
+package controlador;
 
 import java.util.ArrayList;
 
+import entidades.Paciente;
 import exceptions.*;
 
 import java.io.*;
@@ -41,6 +42,15 @@ public class Clientes {
     public Paciente selecionaPaciente(int idPaciente) throws PacienteNaoEncontradoException {
         for (Paciente pacienteCadastrado : clientes) {
             if (pacienteCadastrado.getIdPaciente() == idPaciente) {
+                return pacienteCadastrado;
+            }
+        }
+        throw new PacienteNaoEncontradoException();
+    }
+
+    public Paciente selecionaPaciente(String nomePaciente) throws PacienteNaoEncontradoException {
+        for (Paciente pacienteCadastrado : clientes) {
+            if (pacienteCadastrado.getNome() == nomePaciente) {
                 return pacienteCadastrado;
             }
         }

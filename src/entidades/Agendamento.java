@@ -1,40 +1,48 @@
 package entidades;
 
-import java.util.Date;
-
 public class Agendamento {
-    private Medico medico;
-    private Paciente paciente;
-    private Date horario;
+    private String nomeMedico;
+    private String especialidadeMedico;
+    private String nomePaciente;
+    private String horario;
     private int id;
 
-    public Agendamento(Medico medico, Paciente paciente, Date horario) {
-        this.medico = medico;
-        this.paciente = paciente;
+    public Agendamento(String nomeMedico, String nomePaciente, String especialidadeMedico, String horario) {
+        this.nomeMedico = nomeMedico;
+        this.especialidadeMedico = especialidadeMedico;
+        this.nomePaciente = nomePaciente;
         this.horario = horario;
     }
 
-    public Medico getMedico() {
-        return medico;
+    public String getNomeMedico() {
+        return nomeMedico;
     }
 
-    public void setMedico(Medico medico) {
-        this.medico = medico;
+    public void setNomeMedico(String nomeMedico) {
+        this.nomeMedico = nomeMedico;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public String getEspecialidadeMedico() {
+        return especialidadeMedico;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setEspecialidadeMedico(String especialidadeMedico) {
+        this.especialidadeMedico = especialidadeMedico;
     }
 
-    public Date getHorario() {
+    public String getNomePaciente() {
+        return nomePaciente;
+    }
+
+    public void setNomePaciente(String nomePaciente) {
+        this.nomePaciente = nomePaciente;
+    }
+
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(Date horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
 
@@ -46,12 +54,20 @@ public class Agendamento {
         return id;
     }
 
+    public String toStringBonito() {
+        return "Id: " + id +
+                "\nDoutor(a): " + nomeMedico +
+                "\nPaciente: " + nomePaciente +
+                "\nEspecialidade: " + especialidadeMedico +
+                "\nHorário: " + horario + "\n";
+    }
+
     @Override
     public String toString() {
-        return "Id: " + id +
-                "\nDoutor(a): " + medico.getNome() +
-                "\nPaciente: " + paciente.getNome() +
-                "\nEspecialidade: " + medico.getEspecialidade() +
-                "\nHorário: " + horario.toString() + "\n";
+        return "Id:-" + id +
+                "\nDoutor(a):-" + nomeMedico +
+                "\nPaciente:-" + nomePaciente +
+                "\nEspecialidade:-" + especialidadeMedico +
+                "\nHorário:-" + horario + "\n";
     }
 }
