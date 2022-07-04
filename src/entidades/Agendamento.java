@@ -4,14 +4,18 @@ public class Agendamento {
     private String nomeMedico;
     private String especialidadeMedico;
     private String nomePaciente;
-    private String horario;
+    private String dia, hora;
     private int id;
 
-    public Agendamento(String nomeMedico, String nomePaciente, String especialidadeMedico, String horario) {
+    public Agendamento() {
+    }
+
+    public Agendamento(String nomeMedico, String nomePaciente, String especialidadeMedico, String dia, String hora) {
         this.nomeMedico = nomeMedico;
         this.especialidadeMedico = especialidadeMedico;
         this.nomePaciente = nomePaciente;
-        this.horario = horario;
+        this.dia = dia;
+        this.hora = hora;
     }
 
     public String getNomeMedico() {
@@ -38,12 +42,20 @@ public class Agendamento {
         this.nomePaciente = nomePaciente;
     }
 
-    public String getHorario() {
-        return horario;
+    public String getDia() {
+        return dia;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     public void setId(int id) {
@@ -59,7 +71,7 @@ public class Agendamento {
                 "\nDoutor(a): " + nomeMedico +
                 "\nPaciente: " + nomePaciente +
                 "\nEspecialidade: " + especialidadeMedico +
-                "\nHorário agendado: " + horario + "\n";
+                "\nHorário agendado: " + dia + " " + hora + "\n";
     }
 
     @Override
@@ -69,6 +81,6 @@ public class Agendamento {
                 "\nDoutor(a):-" + nomeMedico +
                 "\nPaciente:-" + nomePaciente +
                 "\nEspecialidade:-" + especialidadeMedico +
-                "\nHorário agendado:-" + horario + "\n";
+                "\nHorário agendado:-" + dia + " " + hora + "\n";
     }
 }

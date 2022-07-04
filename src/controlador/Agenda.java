@@ -36,21 +36,23 @@ public class Agenda {
 
     public void verificaHorario(Agendamento agendamento) throws AgendamentoIndisponivelException {
         for (Agendamento agendamentoCadastrado : agenda) {
-            if (agendamentoCadastrado.getHorario().equalsIgnoreCase(agendamento.getHorario())
+            if (agendamentoCadastrado.getDia().equalsIgnoreCase(agendamento.getDia()) && agendamentoCadastrado.getHora()
+                    .equalsIgnoreCase(agendamento.getHora())
                     && agendamentoCadastrado.getNomeMedico().equalsIgnoreCase(agendamento.getNomeMedico())) {
                 throw new AgendamentoIndisponivelException();
             }
         }
     }
 
-    public void removerAgendamento(int idAgendamento) throws IOException {
+    public void removerAgendamento(int idAgendamento)
+            throws IOException, AgendamentoNaoEncontradoException, AgendamentoIndisponivelException {
         for (Agendamento agendados : agenda) {
             if (agendados.getId() == idAgendamento) {
                 agenda.remove(agendados);
+                removerArquivo(idAgendamento);
                 break;
             }
         }
-        registrar();
     }
 
     public String listarAgendamentos() {
@@ -63,8 +65,8 @@ public class Agenda {
 
     public String listarAgendamentosEspera() {
         StringBuilder saida = new StringBuilder();
-        for (Agendamento agendados : listaEspera) {
-            saida.append(agendados.toStringBonito());
+        for (Agendamento agendadosEspera : listaEspera) {
+            saida.append(agendadosEspera.toStringBonito());
         }
         return saida.toString();
     }
@@ -76,6 +78,22 @@ public class Agenda {
             }
         }
         throw new AgendamentoNaoEncontradoException();
+    }
+
+    public Agendamento excluirAgendamentoEspera(Agendamento agendado)
+            throws AgendamentoNaoEncontradoException, IOException {
+        Agendamento temp = new Agendamento();
+        for (Agendamento agendados : agenda) {
+            if (agendados.getNomeMedico() == agendado.getNomeMedico() && agendados.getDia() == agendado
+                    .getDia() && agendados.getHora() == agendado
+                            .getHora()) {
+                temp = agendados;
+                listaEspera.remove(agendados);
+                removerArquivoEspera(agendados.getId());
+                return temp;
+            }
+        }
+        return null;
     }
 
     // Inserir no arquivo dos Medicos
@@ -107,10 +125,10 @@ public class Agenda {
             if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
                     || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
                 arquivo = new File(
-                        "C:\\workspace\\Projeto3-POO\\Arquivos\\Agendamentos(ListaEspera)\\Id-" + id + ".txt");
+                        "C:\\workspace\\Projeto3-POO\\Arquivos\\(ListaEspera)Agendamentos\\Id-" + id + ".txt");
             } else {
                 arquivo = new File(
-                        "/home/matheus/Programming/Projeto3-POO/Arquivos/Agendamentos(ListaEspera)/Id-" + id + ".txt");
+                        "/home/matheus/Programming/Projeto3-POO/Arquivos/(ListaEspera)Agendamentos/Id-" + id + ".txt");
             }
 
             BufferedWriter escritorBuff = new BufferedWriter(new FileWriter(arquivo));
@@ -132,7 +150,27 @@ public class Agenda {
                     "/home/matheus/Programming/Projeto3-POO/Arquivos/Agendamentos/");
         }
         for (File arquivos : arquivo.listFiles()) {
+            if (arquivos.getName().equalsIgnoreCase("Id-" + idAgendamento + ".txt")) {
+                arquivos.delete();
+                break;
+            }
+        }
+    }
 
+    public void removerArquivoEspera(int idAgendamento) throws IOException {
+        if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
+                || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
+            arquivo = new File(
+                    "C:\\workspace\\Projeto3-POO\\Arquivos\\(ListaEspera)Agendamentos\\");
+        } else {
+            arquivo = new File(
+                    "/home/matheus/Programming/Projeto3-POO/Arquivos/(ListaEspera)Agendamentos/");
+        }
+        for (File arquivos : arquivo.listFiles()) {
+            if (arquivos.getName().equalsIgnoreCase("Id-" + idAgendamento + ".txt")) {
+                arquivos.delete();
+                break;
+            }
         }
     }
 

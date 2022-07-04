@@ -74,7 +74,7 @@ public class Inicializador {
         for (File agendamentos : arquivo.listFiles()) {
             String[] dados;
             String[] dadosExtraidos = new String[5];
-            BufferedReader leitorBuff = new BufferedReader(new FileReader(agendamentos.getAbsolutePath()));
+            BufferedReader leitorBuff = new BufferedReader(new FileReader(agendamentos));
             int i = 0;
             while (true) {
                 linha = leitorBuff.readLine();
@@ -85,8 +85,9 @@ public class Inicializador {
                 dadosExtraidos[i] = dados[1];
                 i++;
             }
-            Agendamento temp = new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3],
-                    dadosExtraidos[4]);
+            String[] dataHora = dadosExtraidos[4].split(" ");
+            Agendamento temp = new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dataHora[0],
+                    dataHora[1]);
             temp.setId(Integer.parseInt(dadosExtraidos[0]));
             agenda.agendar(temp);
 
@@ -95,14 +96,14 @@ public class Inicializador {
         linha = "";
         if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
                 || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
-            arquivo = new File("C:\\workspace\\Projeto3-POO\\Arquivos\\Agendamentos(ListaEspera)\\");
+            arquivo = new File("C:\\workspace\\Projeto3-POO\\Arquivos\\(ListaEspera)Agendamentos\\");
         } else {
-            arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/Agendamentos(ListaEspera)/");
+            arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/(ListaEspera)Agendamentos/");
         }
         for (File agendamentos : arquivo.listFiles()) {
             String[] dados;
             String[] dadosExtraidos = new String[5];
-            BufferedReader leitorBuff = new BufferedReader(new FileReader(agendamentos.getAbsolutePath()));
+            BufferedReader leitorBuff = new BufferedReader(new FileReader(agendamentos));
             int i = 0;
             while (true) {
                 linha = leitorBuff.readLine();
@@ -113,8 +114,9 @@ public class Inicializador {
                 dadosExtraidos[i] = dados[1];
                 i++;
             }
-            Agendamento temp = new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3],
-                    dadosExtraidos[4]);
+            String[] dataHora = dadosExtraidos[4].split(" ");
+            Agendamento temp = new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dataHora[0],
+                    dataHora[1]);
             temp.setId(Integer.parseInt(dadosExtraidos[0]));
             agenda.agendarListaEspera(temp);
 
@@ -145,7 +147,8 @@ public class Inicializador {
                 i++;
             }
             Consulta temp = new Consulta(
-                    new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dadosExtraidos[4]),
+                    new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dadosExtraidos[4],
+                            dadosExtraidos[5]),
                     dadosExtraidos[6]);
             temp.setId(Integer.parseInt(dadosExtraidos[0]));
             String[] dataHora = dadosExtraidos[5].split(" ");
