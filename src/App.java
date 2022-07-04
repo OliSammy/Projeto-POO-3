@@ -148,7 +148,7 @@ public class App {
                                 System.out.println("Opção Inválida.");
                                 break;
                         }
-                        menu.mostrarMedicos();
+                        menu.mostrarPacientes();
                         op = lerNum.nextInt();
                     }
                     break;
