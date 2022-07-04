@@ -28,13 +28,15 @@ public class ConsultasRealizadas {
 
     public void gerarArquivos() throws IOException {
         for (Consulta consulta : bancoConsultas) {
-            if (System.getProperty("os.name").equalsIgnoreCase("windows 11")
+            String id = "" + consulta.getAgendamento().getId();
+            if (System.getProperty("os.name").equalsIgnoreCase("Windows 11")
                     || System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
                 arquivo = new File(
-                        "C:\\workspace\\Projeto3-POO\\Consultas Realizadas\\Id: " + consulta.getAgendamento().getId()
+                        "C:\\workspace\\Projeto3-POO\\Arquivos\\Consultas Realizadas\\Id-"
+                                + id
                                 + ".txt");
             } else {
-                arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/Consultas Realizadas/Id: "
+                arquivo = new File("/home/matheus/Programming/Projeto3-POO/Arquivos/Consultas Realizadas/Id-"
                         + consulta.getAgendamento().getId() + ".txt");
             }
             BufferedWriter escritorBuff = new BufferedWriter(new FileWriter(arquivo));

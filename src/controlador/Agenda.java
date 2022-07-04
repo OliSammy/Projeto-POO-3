@@ -132,7 +132,7 @@ public class Agenda {
                     "/home/matheus/Programming/Projeto3-POO/Arquivos/Agendamentos/");
         }
         for (File arquivos : arquivo.listFiles()) {
-            System.out.println(arquivos.getName());
+
         }
     }
 

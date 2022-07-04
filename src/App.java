@@ -4,6 +4,7 @@ import java.util.Scanner;
 import controlador.*;
 import entidades.*;
 import exceptions.*;
+import paineis.MenuPrincipal;
 import servicos.Consulta;
 import servicos.Inicializador;
 
@@ -20,67 +21,92 @@ public class App {
         ini.iniciar(agenda);
         ini.iniciar(bancoConsultas);
         // Classes entidades
-        Medico medico;
-        Paciente paciente;
-        Agendamento agendamento;
-        Consulta consulta;
+        Medico medico = null;
+        Paciente paciente = null;
+        Agendamento agendamento = null;
+        Consulta consulta = null;
+        MenuPrincipal menu = new MenuPrincipal();
         // Variáveis que serão usadas em basicamente todas as entradas
         String nome, especialidade, sexo, horario;
-        int id, idade;
+        int id, idade, op;
         // Scanners que serão utéis
         Scanner lerNum = new Scanner(System.in);
         Scanner lerStr = new Scanner(System.in);
         //
-        medico = new Medico("Matheus", "Dentista", 01);
-        staff.inserirMedico(medico);
-        medico = new Medico("Samuel", "Legista", 02);
-        staff.inserirMedico(medico);
-        medico = new Medico("Clara", "Oftamologista", 03);
-        staff.inserirMedico(medico);
+        menu.mostrarPrincipal();
+        op = lerNum.nextInt();
+        while (op != 5) {
+            switch (op) {
+                case 1:
+                    menu.mostrarMedicos();
+                    op = lerNum.nextInt();
+                    while (op != 6) {
+                        switch (op) {
+                            case 1:
+                                medico = new Medico();
+                                System.out.print("Digite o nome: ");
+                                medico.setNome(lerStr.next());
+                                System.out.print("Digite a especialidade: ");
+                                medico.setEspecialidade(lerStr.next());
+                                System.out.print("Digite o id: ");
+                                medico.setIdMedico(lerNum.nextInt());
+                                staff.inserirMedico(medico);
+                                break;
+                            case 2:
+                                System.out.print("Digite o id do médico que deseja alterar: ");
+                                try {
+                                    medico = staff.selecionaMedico(lerNum.nextInt());
+                                } catch (MedicoNaoEncontradoException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                System.out.print("Digite o novo nome: ");
+                                medico.setNome(lerStr.next());
+                                System.out.print("Digite a nova especialidade: ");
+                                medico.setEspecialidade(lerStr.next());
+                                staff.registrarArquivo();
+                                System.out.println("Dados alterados com sucesso.");
+                                break;
+                            case 3:
+                                System.out.print("Digite o id do médico que deseja remover: ");
+                                staff.removerMedico(lerNum.nextInt());
+                                System.out.println("Médico removido com sucesso.");
+                                break;
+                            case 4:
+                                System.out.print("Digite o id do médico que deseja pesquisar: ");
+                                try {
+                                    medico = staff.selecionaMedico(lerNum.nextInt());
+                                } catch (MedicoNaoEncontradoException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                System.out.println("Dados do médico selecionado:\n");
+                                System.out.println(medico);
+                                break;
+                            default:
+                                break;
+                        }
+                        menu.mostrarMedicos();
+                        op = lerNum.nextInt();
+                    }
+                    break;
+                case 2:
+                    menu.mostrarPacientes();
+                    break;
+                case 3:
+                    menu.mostrarConsultas();
+                    break;
+                case 4:
 
-        paciente = new Paciente("Eduardo", 20, "Masculino", 01);
-        clientes.inserirPaciente(paciente);
-        paciente = new Paciente("Alicia", 19, "Feminino", 02);
-        clientes.inserirPaciente(paciente);
-        paciente = new Paciente("Pedro", 18, "Masculino", 03);
-        clientes.inserirPaciente(paciente);
+                    break;
+                case 5:
 
-        agendamento = new Agendamento("Matheus", "Eduardo", "Dentista", "04/07/2022 14:00");
-        agenda.agendar(agendamento);
-        consulta = new Consulta(agendamento, "Só um teste mesmo.");
-        bancoConsultas.registrarConsulta(consulta);
+                    break;
 
-        agendamento = new Agendamento("Samuel", "Alicia", "Legista", "04/07/2022 14:00");
-        agenda.agendar(agendamento);
-        consulta = new Consulta(agendamento, "Só um teste mesmo.");
-        bancoConsultas.registrarConsulta(consulta);
-
-        agendamento = new Agendamento("Clara", "Pedro", "Oftamologista", "04/07/2022 17:00");
-        agenda.agendar(agendamento);
-        consulta = new Consulta(agendamento, "Só um teste mesmo.");
-        bancoConsultas.registrarConsulta(consulta);
-
-        agendamento = new Agendamento("Clara", "Pedro", "Oftamologista", "04/07/2022 17:00");
-        try {
-            agenda.agendar(agendamento);
-        } catch (AgendamentoIndisponivelException e) {
-            System.out.println(e.getMessage());
-            System.out.println("beleza?");
-            String x = lerStr.next();
-            agenda.agendarListaEspera(agendamento);
+                default:
+                    System.out.println("Opçãp inválida");
+                    break;
+            }
+            menu.mostrarPrincipal();
+            op = lerNum.nextInt();
         }
-        consulta = new Consulta(agendamento, "Só um teste mesmo.");
-        bancoConsultas.registrarConsulta(consulta);
-
-        System.out.println(staff.listarMedicos());
-        System.out.println();
-        System.out.println(clientes.listarPacientes());
-        System.out.println();
-        System.out.println(agenda.listarAgendamentos());
-        System.out.println();
-        System.out.println(agenda.listarAgendamentosEspera());
-        System.out.println();
-
-        agenda.removerArquivo(1);
     }
 }
