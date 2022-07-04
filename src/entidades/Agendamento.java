@@ -10,7 +10,9 @@ public class Agendamento {
     public Agendamento() {
     }
 
-    public Agendamento(String nomeMedico, String nomePaciente, String especialidadeMedico, String dia, String hora) {
+    public Agendamento(int id, String nomeMedico, String nomePaciente, String especialidadeMedico, String dia,
+            String hora) {
+        this.id = id;
         this.nomeMedico = nomeMedico;
         this.especialidadeMedico = especialidadeMedico;
         this.nomePaciente = nomePaciente;

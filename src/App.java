@@ -21,15 +21,15 @@ public class App {
         ini.iniciar(agenda);
         ini.iniciar(bancoConsultas);
         // Classes entidades
-        Medico medico = new Medico();
-        Paciente paciente = new Paciente();
-        Agendamento agendamento = new Agendamento();
+        Medico medico = null;
+        Paciente paciente = null;
+        Agendamento agendamento = null;
         Consulta consulta = null;
         MenuPrincipal menu = new MenuPrincipal();
         // Variáveis que serão usadas em basicamente todas as entradas
-        String nome, especialidade, sexo, horario, escolha;
+        String escolha;
         String[] dados;
-        int id, idade, op;
+        int op;
         // Scanners que serão utéis
         Scanner lerNum = new Scanner(System.in);
         Scanner lerStr = new Scanner(System.in);
@@ -100,6 +100,7 @@ public class App {
                     while (op != 6) {
                         switch (op) {
                             case 1:
+                                paciente = new Paciente();
                                 System.out.print("Digite o nome: ");
                                 paciente.setNome(lerStr.next());
                                 System.out.print("Digite a idade: ");
@@ -158,6 +159,8 @@ public class App {
                     while (op != 5) {
                         switch (op) {
                             case 1:
+                                agendamento = new Agendamento();
+
                                 System.out.print("Digite o id do médico para qual deseja agendar: ");
                                 medico = staff.selecionaMedico(lerStr.nextInt());
                                 agendamento.setNomeMedico(medico.getNome());

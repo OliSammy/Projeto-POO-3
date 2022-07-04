@@ -10,7 +10,6 @@ public class Agenda {
     private ArrayList<Agendamento> agenda;
     private ArrayList<Agendamento> listaEspera;
     private File arquivo;
-    private int controleId;
 
     public Agenda() {
         agenda = new ArrayList<Agendamento>();
@@ -18,28 +17,24 @@ public class Agenda {
     }
 
     public void agendar(Agendamento agendamento) throws AgendamentoIndisponivelException, IOException {
-        controleId = agenda.size();
         verificaHorario(agendamento);
-        agendamento.setId(controleId + 1);
-        controleId++;
         agenda.add(agendamento);
         registrar();
     }
 
     public void agendarListaEspera(Agendamento agendamento) throws AgendamentoIndisponivelException, IOException {
-        controleId = listaEspera.size();
-        agendamento.setId(controleId + 1);
-        controleId++;
         listaEspera.add(agendamento);
         registrarEspera();
     }
 
     public void verificaHorario(Agendamento agendamento) throws AgendamentoIndisponivelException {
         for (Agendamento agendamentoCadastrado : agenda) {
-            if (agendamentoCadastrado.getDia().equalsIgnoreCase(agendamento.getDia()) && agendamentoCadastrado.getHora()
-                    .equalsIgnoreCase(agendamento.getHora())
-                    && agendamentoCadastrado.getNomeMedico().equalsIgnoreCase(agendamento.getNomeMedico())) {
-                throw new AgendamentoIndisponivelException();
+            if (agendamento.getDia().equals(agendamentoCadastrado.getDia())) {
+                if (agendamento.getHora().equals(agendamentoCadastrado.getHora())) {
+                    if (agendamento.getNomeMedico().equals(agendamentoCadastrado.getNomeMedico())) {
+                        throw new AgendamentoIndisponivelException();
+                    }
+                }
             }
         }
     }

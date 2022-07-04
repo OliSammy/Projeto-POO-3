@@ -86,9 +86,9 @@ public class Inicializador {
                 i++;
             }
             String[] dataHora = dadosExtraidos[4].split(" ");
-            Agendamento temp = new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dataHora[0],
+            Agendamento temp = new Agendamento(Integer.parseInt(
+                    dadosExtraidos[0]), dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dataHora[0],
                     dataHora[1]);
-            temp.setId(Integer.parseInt(dadosExtraidos[0]));
             agenda.agendar(temp);
 
             leitorBuff.close();
@@ -115,9 +115,9 @@ public class Inicializador {
                 i++;
             }
             String[] dataHora = dadosExtraidos[4].split(" ");
-            Agendamento temp = new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dataHora[0],
+            Agendamento temp = new Agendamento(Integer.parseInt(
+                    dadosExtraidos[0]), dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dataHora[0],
                     dataHora[1]);
-            temp.setId(Integer.parseInt(dadosExtraidos[0]));
             agenda.agendarListaEspera(temp);
 
             leitorBuff.close();
@@ -147,13 +147,10 @@ public class Inicializador {
                 i++;
             }
             Consulta temp = new Consulta(
-                    new Agendamento(dadosExtraidos[1], dadosExtraidos[2], dadosExtraidos[3], dadosExtraidos[4],
+                    new Agendamento(Integer.parseInt(dadosExtraidos[0]), dadosExtraidos[1], dadosExtraidos[2],
+                            dadosExtraidos[3], dadosExtraidos[4],
                             dadosExtraidos[5]),
                     dadosExtraidos[6]);
-            temp.setId(Integer.parseInt(dadosExtraidos[0]));
-            String[] dataHora = dadosExtraidos[5].split(" ");
-            temp.setData(dataHora[0]);
-            temp.setHora(dataHora[1]);
             temp.setDescricao(dadosExtraidos[6]);
             bancoConsultas.registrarConsulta(temp);
 
