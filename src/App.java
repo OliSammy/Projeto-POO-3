@@ -27,9 +27,10 @@ public class App {
         Consulta consulta = null;
         MenuPrincipal menu = new MenuPrincipal();
         // Variáveis que serão usadas em basicamente todas as entradas
-        String escolha;
+        StringBuilder descricao;
+        String escolha, notas;
         String[] dados;
-        int op;
+        int op, cont = agenda.getAgenda().size() + 1;
         // Scanners que serão utéis
         Scanner lerNum = new Scanner(System.in);
         Scanner lerStr = new Scanner(System.in);
@@ -63,7 +64,8 @@ public class App {
                                 System.out.print("Digite o novo nome: ");
                                 medico.setNome(lerStr.next());
                                 System.out.print("Digite a nova especialidade: ");
-                                medico.setEspecialidade(lerStr.next());
+                                lerStr.nextLine();
+                                medico.setEspecialidade(lerStr.nextLine());
                                 staff.registrarArquivo();
                                 System.out.println("Dados alterados com sucesso.");
                                 break;
@@ -156,11 +158,13 @@ public class App {
                 case 3:
                     menu.mostrarConsultas();
                     op = lerNum.nextInt();
-                    while (op != 5) {
+                    while (op != 6) {
                         switch (op) {
                             case 1:
                                 agendamento = new Agendamento();
 
+                                agendamento.setId(cont);
+                                cont++;
                                 System.out.print("Digite o id do médico para qual deseja agendar: ");
                                 medico = staff.selecionaMedico(lerStr.nextInt());
                                 agendamento.setNomeMedico(medico.getNome());
@@ -198,10 +202,40 @@ public class App {
                                 // System.out.println("Agendamento removido com sucesso.");
                                 break;
                             case 3:
+                                System.out.print("Digite o id da consulta que deseja cancelar: ");
+
+                                try {
+                                    agenda.cancelarAgendamento(lerNum.nextInt());
+                                    System.out.println("Cancelamento realizado com sucesso.");
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
 
                                 break;
                             case 4:
-                                System.out.println(agenda.listarAgendamentos());
+                                descricao = new StringBuilder();
+                                System.out.print("Digite o id do agendamento a ser realizado: ");
+                                try {
+                                    agendamento = agenda.selecionarAgendamento(lerNum.nextInt());
+                                    agenda.removerAgendamento(agendamento.getId());
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                System.out.println(
+                                        "Informe o que foi relizado na consulta:");
+                                descricao.append(lerStr.nextLine() + "\n");
+                                System.out.println(
+                                        "Informe possiveis médicamentos ou recomendações passadas ao paciente:");
+                                descricao.append(lerStr.nextLine());
+                                consulta = new Consulta(agendamento, descricao.toString());
+                                try {
+                                    bancoConsultas.registrarConsulta(consulta);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                break;
+                            case 5:
+                                System.out.println(agenda.listarAgendamentosEspera());
                                 break;
                             default:
                                 break;

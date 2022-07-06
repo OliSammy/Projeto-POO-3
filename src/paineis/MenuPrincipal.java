@@ -19,7 +19,8 @@ public class MenuPrincipal {
 
     public void mostrarConsultas() {
         System.out.println("\t\tMenu Agendamentos selecionado");
-        System.out.println("\n1.Agendar 2.Remover 3.Realizar consulta 4.Listar agendamentos 5.voltar");
+        System.out.println(
+                "\n1.Agendar 2.Remover 3.Cancelar Agendamento 4.Realizar consulta 5.Listar agendamentos 6.voltar");
     }
 
 }

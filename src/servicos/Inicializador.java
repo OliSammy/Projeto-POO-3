@@ -146,12 +146,12 @@ public class Inicializador {
                 dadosExtraidos[i] = dados[1];
                 i++;
             }
+            String[] dataHora = dadosExtraidos[4].split(" ");
             Consulta temp = new Consulta(
                     new Agendamento(Integer.parseInt(dadosExtraidos[0]), dadosExtraidos[1], dadosExtraidos[2],
-                            dadosExtraidos[3], dadosExtraidos[4],
-                            dadosExtraidos[5]),
-                    dadosExtraidos[6]);
-            temp.setDescricao(dadosExtraidos[6]);
+                            dadosExtraidos[3], dataHora[0],
+                            dataHora[1]),
+                    dadosExtraidos[5]);
             bancoConsultas.registrarConsulta(temp);
 
             leitorBuff.close();

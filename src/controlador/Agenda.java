@@ -39,6 +39,29 @@ public class Agenda {
         }
     }
 
+    public void cancelarAgendamento(int idAgendamento)
+            throws IOException, AgendamentoNaoEncontradoException, AgendamentoIndisponivelException {
+        Agendamento temp = new Agendamento();
+        for (Agendamento agendados : agenda) {
+            if (agendados.getId() == idAgendamento) {
+                temp = agendados;
+                agenda.remove(agendados);
+                removerArquivo(agendados.getId());
+                break;
+            }
+        }
+        if (temp == null)
+            throw new AgendamentoNaoEncontradoException();
+        Agendamento temp2 = new Agendamento();
+        try {
+            temp2 = selecionarAgendamentoEspera(temp);
+            agendar(temp2);
+        } catch (Exception e) {
+
+        }
+
+    }
+
     public void removerAgendamento(int idAgendamento)
             throws IOException, AgendamentoNaoEncontradoException, AgendamentoIndisponivelException {
         for (Agendamento agendados : agenda) {
@@ -70,6 +93,24 @@ public class Agenda {
         for (Agendamento agendados : agenda) {
             if (agendados.getId() == id) {
                 return agendados;
+            }
+        }
+        throw new AgendamentoNaoEncontradoException();
+    }
+
+    public Agendamento selecionarAgendamentoEspera(Agendamento outro)
+            throws AgendamentoNaoEncontradoException, IOException {
+        Agendamento temp = new Agendamento();
+        for (Agendamento agendados : listaEspera) {
+            if (agendados.getNomeMedico().equals(outro.getNomeMedico())) {
+                if (agendados.getDia().equals(outro.getDia())) {
+                    if (agendados.getHora().equals(outro.getHora())) {
+                        temp = agendados;
+                        listaEspera.remove(agendados);
+                        removerArquivoEspera(agendados.getId());
+                        return temp;
+                    }
+                }
             }
         }
         throw new AgendamentoNaoEncontradoException();
