@@ -50,6 +50,6 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "Nome: " + nome + "\nIdade: " + idade + "\nId: " + idPaciente + "\n";
+        return "Paciente: " + nome + "\nIdade: " + idade + "\nGênero:" + sexo + "\nId: " + idPaciente + "\n";
     }
 }

@@ -1,4 +1,5 @@
 
+import java.nio.channels.Pipe.SourceChannel;
 import java.util.Scanner;
 
 import controlador.*;
@@ -54,12 +55,18 @@ public class App {
                                 staff.inserirMedico(medico);
                                 break;
                             case 2:
-                                System.out.print("Digite o id do médico que deseja alterar: ");
+                                System.out.print("\nDigite o id do médico que deseja alterar: ");
                                 try {
                                     medico = staff.selecionaMedico(lerNum.nextInt());
                                 } catch (MedicoNaoEncontradoException e) {
                                     System.out.println(e.getMessage());
                                 }
+                                
+                                System.out.println("Esse é o médico selecionado\n"+ medico +"Esse é o médico que deseja alterar?\n S ou N");
+                                String escolhaAlterarMedico=lerStr.next();
+                                if(escolhaAlterarMedico.equalsIgnoreCase("n")){
+                                    break;
+                                }    
                                 System.out.print("Digite o novo nome: ");
                                 medico.setNome(lerStr.next());
                                 System.out.print("Digite a nova especialidade: ");
@@ -67,13 +74,24 @@ public class App {
                                 staff.registrarArquivo();
                                 System.out.println("Dados alterados com sucesso.");
                                 break;
+                            
                             case 3:
-                                System.out.print("Digite o id do médico que deseja remover: ");
+                                System.out.print("\nDigite o id do médico que deseja remover: ");
+                                try {
+                                    medico = staff.selecionaMedico(lerNum.nextInt());
+                                } catch (MedicoNaoEncontradoException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                System.out.println("Esse é o médico selecionado:\n"+ medico +"Esse é o médico que deseja remover?\n S ou N");
+                               String escolhaRemoverMedico=lerStr.next();
+                                if(escolhaRemoverMedico.equalsIgnoreCase("n")){
+                                    break;}
                                 staff.removerMedico(lerNum.nextInt());
-                                System.out.println("Médico removido com sucesso.");
+                                System.out.println("\nMédico removido com sucesso.");
                                 break;
+                            
                             case 4:
-                                System.out.print("Digite o id do médico que deseja pesquisar: ");
+                                System.out.print("\nDigite o id do médico que deseja pesquisar: ");
                                 try {
                                     medico = staff.selecionaMedico(lerNum.nextInt());
                                 } catch (MedicoNaoEncontradoException e) {
@@ -85,12 +103,14 @@ public class App {
                                 System.out.println(medico);
                                 break;
                             case 5:
+                             System.out.println("\nEsses são os médicos cadastrados:\n");
                                 System.out.println(staff.listarMedicos());
                                 break;
                             default:
                                 break;
                         }
-                        menu.mostrarMedicos();
+                        System.out.println();
+                        menu.retornaraoMenuMedico();
                         op = lerNum.nextInt();
                     }
                     break;
@@ -118,6 +138,12 @@ public class App {
                                 } catch (PacienteNaoEncontradoException e) {
                                     System.out.println(e.getMessage());
                                 }
+                                System.out.println("Esse é o paciente selecionado\n"+ medico +"Esse é o paciente que deseja alterar?\n S ou N");
+                               String escolhaPacienteAlterar=lerStr.next();
+                                if(escolhaPacienteAlterar.equalsIgnoreCase("n")){
+                                    break;}
+                                System.out.println("Esse é o paciente selecionado:\n" + paciente);
+                                System.out.println();
                                 System.out.print("Digite o novo nome: ");
                                 paciente.setNome(lerStr.next());
                                 System.out.print("Digite a nova idade: ");
@@ -129,9 +155,13 @@ public class App {
                                 break;
                             case 3:
                                 System.out.print("Digite o id do paciente que deseja remover: ");
+                                System.out.println("Esse é o paciente selecionado\n"+ medico +"Esse é o paciente que deseja remover?\n S ou N");
+                                String escolhaRemoverPaciente=lerStr.next();
+                                if(escolhaRemoverPaciente.equalsIgnoreCase("n")){
+                                    break;}
                                 clientes.removerPaciente(lerNum.nextInt());
                                 System.out.println("Paciente removido com sucesso.");
-                                break;
+                              
                             case 4:
                                 System.out.print("Digite o id do paciente que deseja pesquisar: ");
                                 try {
@@ -143,10 +173,10 @@ public class App {
                                 System.out.println(paciente);
                                 break;
                             case 5:
-                                System.out.println(clientes.listarPacientes());
+                             System.out.println(clientes.listarPacientes());
                                 break;
                             default:
-                                System.out.println("Opção Inválida.");
+                                System.out.println("\nOpção Inválida.");
                                 break;
                         }
                         menu.mostrarPacientes();
@@ -162,7 +192,13 @@ public class App {
                                 agendamento = new Agendamento();
 
                                 System.out.print("Digite o id do médico para qual deseja agendar: ");
+                                try{
                                 medico = staff.selecionaMedico(lerStr.nextInt());
+                                }catch(MedicoNaoEncontradoException e){
+                                    System.out.println(e.getMessage());
+                                    break;
+                                }
+
                                 agendamento.setNomeMedico(medico.getNome());
                                 agendamento.setEspecialidadeMedico(medico.getEspecialidade());
 
@@ -183,12 +219,15 @@ public class App {
                                     escolha = lerStr.next();
                                     if (escolha.equalsIgnoreCase("sim")) {
                                         agenda.agendarListaEspera(agendamento);
+                                        System.out.println("Consultar marcada com sucesso");
                                     }
                                 }
                                 break;
                             case 2:
                                 System.out.print("Digite o id do agendamento que deseja remover: ");
                                 agenda.removerAgendamento(lerNum.nextInt());
+                                System.out.println("Consulta desmarcada com sucesso");
+
                                 // try {
 
                                 // } catch (Exception e) {
@@ -201,6 +240,7 @@ public class App {
 
                                 break;
                             case 4:
+                            System.out.println("\nOs agendamentos marcados são:");
                                 System.out.println(agenda.listarAgendamentos());
                                 break;
                             default:
@@ -218,11 +258,11 @@ public class App {
                     break;
 
                 default:
-                    System.out.println("Opçãp inválida");
+                    System.out.println("\nOpção inválida");
                     break;
             }
             menu.mostrarPrincipal();
             op = lerNum.nextInt();
         }
-    }
+        }
 }

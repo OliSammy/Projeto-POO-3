@@ -2,4 +2,4 @@ Id:-3
 Doutor(a):-Clary
 Paciente:-Larissa
 Especialidade:-Vidente
-Hor√°rio agendado:-09/07/2022 22:00
+Hor·rio agendado:-09/07/2022 22:00
