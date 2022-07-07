@@ -198,7 +198,11 @@ public class App {
                                     System.out.println(e.getMessage());
                                     break;
                                 }
-
+                                System.out.println("Esse é o médico selecionado\n"+ medico +"Deseja alterar o médico?\n S ou N");
+                                String escolhaAgendarConsulta=lerStr.next();
+                                if(escolhaAgendarConsulta.equalsIgnoreCase("n")){
+                                    break;
+                                }
                                 agendamento.setNomeMedico(medico.getNome());
                                 agendamento.setEspecialidadeMedico(medico.getEspecialidade());
 
@@ -212,6 +216,7 @@ public class App {
                                 agendamento.setHora(dados[1]);
                                 try {
                                     agenda.agendar(agendamento);
+                                    System.out.println("Consultar marcada com sucesso");
                                 } catch (AgendamentoIndisponivelException e) {
                                     System.out.println(e.getMessage());
                                     System.out.print("Deseja ir para a lista de espera do doutor(a) "
