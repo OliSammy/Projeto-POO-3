@@ -1,5 +1,0 @@
-Id:-3
-Doutor(a):-Clary
-Paciente:-Lucio
-Especialidade:-Vidente
-Horário agendado:-04/07/2022 15:00

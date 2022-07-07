@@ -2,4 +2,4 @@ Id:-1
 Doutor(a):-Clary
 Paciente:-Julio
 Especialidade:-Vidente
-Hor·rio agendado:-04/07/2022 15:00
+Hor√°rio agendado:-04/07/2022 15:00

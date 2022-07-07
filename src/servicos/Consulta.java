@@ -8,11 +8,11 @@ import entidades.Agendamento;
 
 public class Consulta {
     private Agendamento agendamento;
-    private String descricao;
+    private StringBuilder descricao;
     private String data;
     private String hora;
 
-    public Consulta(Agendamento agendamento, String descricao) throws IOException {
+    public Consulta(Agendamento agendamento, StringBuilder descricao) throws IOException {
         this.agendamento = agendamento;
         this.descricao = descricao;
         Date dataHoraAtual = new Date();
@@ -32,11 +32,11 @@ public class Consulta {
         this.agendamento = agendamento;
     }
 
-    public String getDescricao() {
+    public StringBuilder getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(StringBuilder descricao) {
         this.descricao = descricao;
     }
 
@@ -59,13 +59,13 @@ public class Consulta {
     public String toStringBonito() {
         return agendamento.toStringBonito() +
                 "Data e hora da realização da consulta:-" + data + " " + hora +
-                "\nDescrição da consulta:-" + descricao + "\n";
+                "\nDescrição da consulta:-" + descricao.toString() + "\n";
     }
 
     @Override
     public String toString() {
         return agendamento.toString() +
                 "Data e hora da realização da consulta:-" + data + " " + hora +
-                "\nDescrição da consulta:-" + descricao + "\n";
+                "\nDescrição da consulta:-" + descricao.toString() + "\n";
     }
 }

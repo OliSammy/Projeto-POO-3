@@ -137,7 +137,18 @@ public class Inicializador {
             String[] dadosExtraidos = new String[7];
             BufferedReader leitorBuff = new BufferedReader(new FileReader(agendamentos.getAbsolutePath()));
             int i = 0;
+            StringBuilder descricao = new StringBuilder();
+            ;
             while (true) {
+                if (i == 6) {
+                    while (true) {
+                        if (linha == null) {
+                            break;
+                        }
+                        linha = leitorBuff.readLine();
+                        descricao.append(linha);
+                    }
+                }
                 linha = leitorBuff.readLine();
                 if (linha == null) {
                     break;
@@ -150,8 +161,7 @@ public class Inicializador {
                     new Agendamento(Integer.parseInt(dadosExtraidos[0]), dadosExtraidos[1], dadosExtraidos[2],
                             dadosExtraidos[3], dadosExtraidos[4],
                             dadosExtraidos[5]),
-                    dadosExtraidos[6]);
-            temp.setDescricao(dadosExtraidos[6]);
+                    descricao);
             bancoConsultas.registrarConsulta(temp);
 
             leitorBuff.close();

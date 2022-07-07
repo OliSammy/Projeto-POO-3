@@ -2,4 +2,4 @@ Id:-2
 Doutor(a):-Samuel
 Paciente:-Tuglio
 Especialidade:-Oftamologista
-Hor·rio agendado:-04/08/2022 15:00
+Hor√°rio agendado:-04/08/2022 15:00

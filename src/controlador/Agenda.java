@@ -53,7 +53,7 @@ public class Agenda {
     public String listarAgendamentos() {
         StringBuilder saida = new StringBuilder();
         for (Agendamento agendados : agenda) {
-            saida.append(agendados.toStringBonito());
+            saida.append("\n" + agendados.toStringBonito() + "\n");
         }
         return saida.toString();
     }
@@ -61,7 +61,7 @@ public class Agenda {
     public String listarAgendamentosEspera() {
         StringBuilder saida = new StringBuilder();
         for (Agendamento agendadosEspera : listaEspera) {
-            saida.append(agendadosEspera.toStringBonito());
+            saida.append("\n" + agendadosEspera.toStringBonito() + "\n");
         }
         return saida.toString();
     }
