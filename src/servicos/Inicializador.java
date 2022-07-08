@@ -81,7 +81,7 @@ public class Inicializador {
                 if (linha == null) {
                     break;
                 }
-                dados = linha.split("-");
+                dados = linha.split("_");
                 dadosExtraidos[i] = dados[1];
                 i++;
             }
@@ -110,7 +110,7 @@ public class Inicializador {
                 if (linha == null) {
                     break;
                 }
-                dados = linha.split("-");
+                dados = linha.split("_");
                 dadosExtraidos[i] = dados[1];
                 i++;
             }
@@ -137,12 +137,23 @@ public class Inicializador {
             String[] dadosExtraidos = new String[7];
             BufferedReader leitorBuff = new BufferedReader(new FileReader(agendamentos.getAbsolutePath()));
             int i = 0;
+            StringBuilder descricao = new StringBuilder();
             while (true) {
+                if (i == 5) {
+                    linha = leitorBuff.readLine();
+                    while (true) {
+                        linha = leitorBuff.readLine();
+                        if (linha == null) {
+                            break;
+                        }
+                        descricao.append(linha + "\n");
+                    }
+                }
                 linha = leitorBuff.readLine();
                 if (linha == null) {
                     break;
                 }
-                dados = linha.split("-");
+                dados = linha.split("_");
                 dadosExtraidos[i] = dados[1];
                 i++;
             }
@@ -151,7 +162,7 @@ public class Inicializador {
                     new Agendamento(Integer.parseInt(dadosExtraidos[0]), dadosExtraidos[1], dadosExtraidos[2],
                             dadosExtraidos[3], dataHora[0],
                             dataHora[1]),
-                    dadosExtraidos[5]);
+                    descricao);
             bancoConsultas.registrarConsulta(temp);
 
             leitorBuff.close();
