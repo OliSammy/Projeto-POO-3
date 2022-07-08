@@ -1,0 +1,11 @@
+Id_4
+Doutor(a)_Gab
+Paciente_Clary
+Especialidade_Oftomologista
+Horário agendado_2022-07-09 14:00
+Descrição da consulta:
+Resumo: Acompanhamento semanal
+Sintomas: Sinais de depressão
+Tratamentos: No momento, apenas nossas conversas.
+Medicamentos: Nenhum no momento.
+Exames: Proximo encontro daqui dois dias.

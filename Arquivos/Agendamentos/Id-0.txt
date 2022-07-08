@@ -1,5 +1,0 @@
-Id:-0
-Doutor(a):-Gab
-Paciente:-Matheus
-Especialidade:-Oftomologista
-Horário agendado:-07/07/2022 14:00

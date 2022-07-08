@@ -1,0 +1,11 @@
+Id_3
+Doutor(a)_Matheus
+Paciente_Samuel
+Especialidade_Dentista
+Horário agendado_2022-07-07 14:00
+Descrição da consulta:
+Resumo: 
+Sintomas: Febre
+Tratamentos: Beber muita agua
+Medicamentos: nenhum
+Exames: nenhum

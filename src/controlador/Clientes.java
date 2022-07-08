@@ -50,7 +50,7 @@ public class Clientes {
 
     public Paciente selecionaPaciente(String nomePaciente) throws PacienteNaoEncontradoException {
         for (Paciente pacienteCadastrado : clientes) {
-            if (pacienteCadastrado.getNome() == nomePaciente) {
+            if (pacienteCadastrado.getNome().equalsIgnoreCase(nomePaciente)) {
                 return pacienteCadastrado;
             }
         }
